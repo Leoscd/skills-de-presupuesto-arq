@@ -1,0 +1,8 @@
+{
+  "name": "presupuesto-arq",
+  "version": "1.0.0",
+  "description": "Skill para crear presupuestos de arquitectura - analiza planos, busca precios en Notion, calcula con reglas de construcción",
+  "enabled": true,
+  "env": {},
+  "config": {}
+}
