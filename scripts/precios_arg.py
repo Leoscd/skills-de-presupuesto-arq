@@ -129,3 +129,20 @@ CANIO_ELEC_3_4 = 2800          # Por metro (3/4")
 # Datos típicos
 CABLES_X_PUNTO = 6            # Metros de cable por punto
 PUNTOS_X_BOCA = 2             # Puntos promedio por boca
+
+# ===============================================
+# PORCELANATOS Y CERÁMICOS - Mayo 2026 (Tucumán)
+# Por m² (colocado)
+# ===============================================
+
+# Cerámica / Porcelanato por tamaño
+CERAMICA_30x60 = 23000        # $18k-$28k por m2
+CERAMICA_45x45 = 28000        # $22k-$35k por m2
+PORCELANATO_60x60 = 32000      # $25k-$40k por m2
+PORCELANATO_60x120 = 58000     # $45k-$70k por m2
+PORCELANATO_80x80 = 45000      # $35k-$55k por m2
+
+# Notas finales
+# Los precios incluyen material + colocacion
+# Variacion por zona, marca, importado vs nacional
+# Mayo 2026 - Tucuman, Argentina
