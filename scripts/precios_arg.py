@@ -138,9 +138,15 @@ PUNTOS_X_BOCA = 2             # Puntos promedio por boca
 # Cerámica / Porcelanato por tamaño
 CERAMICA_30x60 = 23000        # $18k-$28k por m2
 CERAMICA_45x45 = 28000        # $22k-$35k por m2
-PORCELANATO_60x60 = 32000      # $25k-$40k por m2
-PORCELANATO_60x120 = 58000     # $45k-$70k por m2
-PORCELANATO_80x80 = 45000      # $35k-$55k por m2
+PORCELANATO_60x60 = 32000     # $25k-$40k por m2
+PORCELANATO_60x120 = 58000    # $45k-$70k por m2
+PORCELANATO_80x80 = 45000     # $35k-$55k por m2
+
+# Insumos para colocacion
+PASTINA = 8500              # Por kg (pastina ready)
+DISCOS_CORTE = 4500         # Por disco (diamante)
+KLAUCOL = 48000             # Por bolsa 25kg
+PEGAMENTO = 32000           # Por bolsa 25kg
 
 # Notas finales
 # Los precios incluyen material + colocacion

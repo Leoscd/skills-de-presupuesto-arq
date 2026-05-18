@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto - Piso Porcelanato 60x60</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        h1 { color: #1a1a1a; text-align: center; margin-bottom: 30px; }
+        h2 { color: #333; border-bottom: 2px solid #2563eb; padding-bottom: 10px; margin-top: 30px; }
+        
+        .header { background: #2563eb; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+        .header h1 { color: white; margin: 0; font-size: 28px; }
+        .header p { margin: 10px 0 0; opacity: 0.9; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; background: white; }
+        th { background: #f8f9fa; padding: 10px; text-align: left; border-bottom: 2px solid #ddd; font-size: 14px; }
+        td { padding: 10px; border-bottom: 1px solid #eee; font-size: 14px; }
+        .td-num { text-align: right; font-family: monospace; font-size: 14px; }
+        
+        .subtotal-row td { background: #f0f0f0; font-weight: bold; }
+        .iva-row td { background: #fff3cd; }
+        .total-row td { background: #2563eb; color: white; font-size: 18px; font-weight: bold; }
+        
+        .grafico { margin-top: 30px; }
+        .bar-container { height: 40px; border-radius: 6px; display: flex; overflow: hidden; margin-top: 10px; }
+        .bar-mat { background: #2563eb; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: bold; }
+        .bar-mo { background: #16a34a; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: bold; }
+        
+        .datos-trabajo { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px; text-align: center; }
+        .dato-box { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .dato-box .valor { font-size: 24px; font-weight: bold; color: #2563eb; }
+        .dato-box .label { font-size: 12px; color: #666; margin-top: 5px; }
+        
+        .footer { margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px; }
+        .footer p { margin: 5px 0; font-size: 13px; color: #666; }
+        
+        .nota-importante { background: #fff3cd; border: 1px solid #f59e0b; padding: 10px; border-radius: 4px; margin-top: 15px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💎 PRESUPUESTO DE COLOCACIÓN</h1>
+            <p>Piso Porcelanato 60x60 | Tucumán, Mayo 2026</p>
+        </div>
+        
+        <div class="datos-trabajo">
+            <div class="dato-box">
+                <div class="valor">35 m²</div>
+                <div class="label">Superficie</div>
+            </div>
+            <div class="dato-box">
+                <div class="valor">60x60</div>
+                <div class="label">Formato</div>
+            </div>
+            <div class="dato-box">
+                <div class="valor">4 cm</div>
+                <div class="label">Carpeta</div>
+            </div>
+            <div class="dato-box">
+                <div class="valor">40 ml</div>
+                <div class="label">Zócalos</div>
+            </div>
+        </div>
+        
+        <!-- MATERIALES -->
+        <h2>🧱 MATERIALES</h2>
+        <table>
+            <thead>
+                <tr><th>Descripción</th><th>Cantidad</th><th>Unitario</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Porcelanato 60x60</td><td class="td-num">35 m²</td><td class="td-num">$18.000</td><td class="td-num">$630.000</td></tr>
+                <tr><td>Arena (carpeta)</td><td class="td-num">1,75 m³</td><td class="td-num">$12.000</td><td class="td-num">$21.000</td></tr>
+                <tr><td>Cemento (carpeta)</td><td class="td-num">35 bolsas</td><td class="td-num">$18.500</td><td class="td-num">$647.500</td></tr>
+                <tr><td>Klaucol (pegamento)</td><td class="td-num">4 bolsas</td><td class="td-num">$48.000</td><td class="td-num">$192.000</td></tr>
+                <tr><td>Pastina</td><td class="td-num">3 kg</td><td class="td-num">$8.500</td><td class="td-num">$25.500</td></tr>
+                <tr><td>Discos de corte (diamante)</td><td class="td-num">4 unidades</td><td class="td-num">$4.500</td><td class="td-num">$18.000</td></tr>
+                <tr><td>Zócalos (material)</td><td class="td-num">40 ml</td><td class="td-num">$2.500</td><td class="td-num">$100.000</td></tr>
+                <tr class="subtotal-row"><td colspan="3">SUBTOTAL MATERIALES</td><td class="td-num">$1.634.000</td></tr>
+            </tbody>
+        </table>
+        
+        <!-- MANO DE OBRA -->
+        <h2>👷 MANO DE OBRA</h2>
+        <table>
+            <thead>
+                <tr><th>Descripción</th><th>Cantidad</th><th>Unitario</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Carpeta nivelación 4 cm</td><td class="td-num">35 m²</td><td class="td-num">$22.000</td><td class="td-num">$770.000</td></tr>
+                <tr><td>Colocación porcelanato</td><td class="td-num">35 m²</td><td class="td-num">$14.000</td><td class="td-num">$490.000</td></tr>
+                <tr><td>Colocación zócalos</td><td class="td-num">40 ml</td><td class="td-num">$1.000</td><td class="td-num">$40.000</td></tr>
+                <tr class="subtotal-row"><td colspan="3">SUBTOTAL MANO DE OBRA</td><td class="td-num">$1.300.000</td></tr>
+            </tbody>
+        </table>
+        
+        <!-- TOTAL -->
+        <h2>💵 RESUMEN</h2>
+        <table>
+            <tr><td>Subtotal Materiales</td><td class="td-num">$1.634.000</td></tr>
+            <tr><td>Subtotal Mano de Obra</td><td class="td-num">$1.300.000</td></tr>
+            <tr class="subtotal-row"><td>SUBTOTAL</td><td class="td-num">$2.934.000</td></tr>
+            <tr class="iva-row"><td>IVA (21%)</td><td class="td-num">$616.140</td></tr>
+            <tr class="total-row"><td>TOTAL PRESUPUESTO</td><td class="td-num">$3.550.140</td></tr>
+        </table>
+        
+        <!-- GRAFICO -->
+        <div class="grafico">
+            <h2>📊 Distribución</h2>
+            <div class="bar-container">
+                <div class="bar-mat" style="width:56%">Materiales 56% ($1.634.000)</div>
+                <div class="bar-mo" style="width:44%">Mano de Obra 44% ($1.300.000)</div>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>Nota:</strong> Los precios son referenciales y pueden variar según zona, marca y proveedor.</p>
+            <p>• Precio válido por 15 días • Colocación incluída • No incluye demolición de piso existente</p>
+            <p>• Presupuesto sujeto a inspección del soporte existente</p>
+            <p>📅 Mayo 2026 | Tucumán, Argentina</p>
+        </div>
+    </div>
+</body>
+</html>
