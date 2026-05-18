@@ -174,3 +174,74 @@ Guardar en `/home/node/.openclaw/workspace/presupuesto.html` para que Leo lo abr
 - La DB de Notion cubre: ladrillos, hierros, hormigón, instalaciones, adhesivos
 - Categorías faltantes en Notion: pisos/porcelanatos (usar precios_arg.py como fallback)
 - Honorarios de arquitecto: no incluídos en el cálculo base
+
+## Plantilla de HTML (OBLIGATORIO)
+
+Usar SIEMPRE `template_presupuesto.html` como base. Ubicación:
+`/home/node/.openclaw/workspace/skills-de-presupuesto-arq/template_presupuesto.html`
+
+**Reglas CSS críticas (NO olvidar):**
+
+1. **`th` SIEMPRE con `background: var(--negro)` y `color: white`**
+   - NO dejar que hereden de `tr:nth-child(even)`
+   - Aplicar directamente en `th {}`
+
+2. **Alternar colores SOLO en `td`, nunca en `tr` completo**
+   ```css
+   tr:nth-child(even) td { background: var(--gris-claro); }
+   tr:nth-child(odd) td { background: var(--blanco); }
+   ```
+   - Si se usa `tr:nth-child(even) { background: var(--gris-claro) }` los `th` heredan el fondo y el texto blanco se vuelve invisible
+
+3. **Bullets de notas en HTML, no en CSS `::before`**
+   - Poner `•` directo en el `<li>• texto</li>`
+   - Usar `.notas li::before { display: none; }`
+
+4. **Badge de sección numérica usar clase `seccion-badge`** (no `num`)
+   ```html
+   <div class="rubro-seccion"><span class="seccion-badge">01</span>Título</div>
+   ```
+
+**Estructura de bloques de rubros:**
+```
+<div class="rubro-seccion"><span class="seccion-badge">NN</span>Título del Rubro</div>
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Descripción</th>
+      <th>Cantidad</th>
+      <th>Precio Unit.</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>01</td>
+      <td><div class="descripcion">...</div><div class="detalle">...</div></td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+**Colores oficiales Leo Díaz:**
+- Dorado: `#9A7A14`
+- Dorado oscuro: `#7a6010`
+- Dorado claro: `#F5EED8`
+- Negro: `#1A1A1A`
+- Gris: `#666`
+- Gris claro: `#f4f4f4`
+- Borde: `#ddd`
+- Blanco: `#fff`
+
+**Para generar rápidamente:**
+```python
+from scripts.generar_presupuesto import generar
+path = generar("Nombre Obra", "REF-2026-001", "Mayo 2026",
+               {'cliente': 'X', 'ubicacion': 'Tucumán', ...},
+               [{'seccion': '01', 'titulo': 'Rubro', 'items': [[...]]}])
+print(path)
+```

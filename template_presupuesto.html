@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Presupuesto Global de Obra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #9A7A14;
+            --gold-oscuro: #7a6010;
+            --gold-claro: #F5EED8;
+            --negro: #1A1A1A;
+            --gris: #666;
+            --gris-claro: #f4f4f4;
+            --borde: #ddd;
+            --blanco: #fff;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--gris-claro);
+            color: var(--negro);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .presupuesto {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--blanco);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-oscuro) 100%);
+            color: white;
+            padding: 40px 50px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-weight: 400;
+            font-size: 14px;
+            display: block;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .meta {
+            text-align: right;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .meta strong {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .titulo {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .titulo-principal {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            padding: 30px 50px;
+            background: var(--gold-claro);
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-oscuro);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .info-item span {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--negro);
+        }
+
+        .rubros {
+            padding: 30px 50px;
+        }
+
+        .rubros-titulo {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--negro);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rubros-titulo::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        /* Sección de rubro — título de grupo */
+        .rubro-seccion {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--negro);
+            margin: 28px 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--borde);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .seccion-badge {
+            background: var(--gold);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* IMPORTANTE: th SIEMPRE con background negro y texto blanco.
+           No usar nth-child en tbody para alternar colores — usar td. */
+        th {
+            text-align: left;
+            padding: 14px 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            background: var(--negro);
+            color: white;
+        }
+
+        th:first-child {
+            background: var(--negro);
+            color: white;
+            text-align: center;
+            width: 50px;
+        }
+
+        th:not(:first-child) {
+            background: var(--negro);
+            color: white;
+        }
+
+        th:nth-child(3) { text-align: right; width: 110px; }
+        th:nth-child(4) { text-align: right; width: 130px; }
+        th:nth-child(5) { text-align: right; width: 140px; }
+
+        td {
+            padding: 14px 16px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--borde);
+            background: var(--blanco);
+        }
+
+        /* Alternar colores SOLO en td, nunca en tr completo */
+        tr:nth-child(even) td { background: var(--gris-claro); }
+        tr:nth-child(odd) td { background: var(--blanco); }
+
+        td:nth-child(1) { text-align: center; font-weight: 700; color: var(--gold-oscuro); }
+        td:nth-child(3) { text-align: right; }
+        td:nth-child(4) { text-align: right; }
+        td:nth-child(5) { text-align: right; font-weight: 700; }
+
+        .descripcion { font-weight: 500; color: var(--negro); }
+        .detalle { font-size: 11px; color: var(--gris); margin-top: 2px; }
+
+        .totales {
+            background: linear-gradient(135deg, var(--negro) 0%, #333 100%);
+            color: white;
+            padding: 40px 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .totales-izq {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .total-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .total-item span:last-child { font-weight: 600; }
+
+        .gran-total {
+            background: var(--gold);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .gran-total-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .gran-total-valor {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .notas {
+            padding: 30px 50px;
+            background: var(--gris-claro);
+            font-size: 12px;
+            color: var(--gris);
+            line-height: 1.8;
+        }
+
+        .notas-titulo {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            color: var(--negro);
+            font-size: 11px;
+        }
+
+        .notas ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 30px;
+        }
+
+        .notas li { list-style: none; }
+        .notas li::before { display: none; }
+
+        .footer {
+            padding: 25px 50px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--gris);
+            border-top: 1px solid var(--borde);
+        }
+
+        .footer strong { color: var(--gold-oscuro); }
+
+        @media (max-width: 700px) {
+            .info { grid-template-columns: repeat(2, 1fr); }
+            .totales { grid-template-columns: 1fr; }
+            .rubros, .header, .info, .totales, .notas, .footer { padding-left: 25px; padding-right: 25px; }
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .presupuesto { box-shadow: none; border-radius: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presupuesto">
+        <div class="header">
+            <div class="header-top">
+                <div class="logo">
+                    ARQ. LEONARDO DÍAZ
+                    <span>Arquitecto</span>
+                </div>
+                <div class="meta">
+                    Ref: PRE-2026-XXX<br>
+                    <strong>Mes Año</strong>
+                </div>
+            </div>
+            <div class="titulo">Presupuesto Global de Obra</div>
+            <div class="titulo-principal">Nombre de Obra</div>
+        </div>
+
+        <div class="info">
+            <div class="info-item">
+                <label>Cliente</label>
+                <span>Nombre</span>
+            </div>
+            <div class="info-item">
+                <label>Ubicación</label>
+                <span>Tucumán, Arg.</span>
+            </div>
+            <div class="info-item">
+                <label>Tipo de Obra</label>
+                <span>Obra Nueva / Refacción</span>
+            </div>
+            <div class="info-item">
+                <label>Superficie</label>
+                <span>XX m²</span>
+            </div>
+            <div class="info-item">
+                <label>Hormigón</label>
+                <span>H-21</span>
+            </div>
+        </div>
+
+        <div class="rubros">
+            <div class="rubros-titulo">Detalle de Rubros</div>
+
+            <!-- EJEMPLO: cada rubro tiene su sección -->
+            <div class="rubro-seccion"><span class="seccion-badge">01</span>Título del Rubro</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unit.</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td>
+                            <div class="descripcion">Descripción del ítem</div>
+                            <div class="detalle">Detalle adicional · unidad</div>
+                        </td>
+                        <td>XX,XX m²</td>
+                        <td>$ XXX.XXX</td>
+                        <td>$ XX.XXX.XXX</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Repetir bloque .rubro-seccion + table por cada rubro -->
+
+        </div>
+
+        <div class="totales">
+            <div class="totales-izq">
+                <div class="total-item">
+                    <span>Materiales</span>
+                    <span>$ XX.XXX.XXX</span>
+                </div>
+                <div class="total-item">
+                    <span>Mano de Obra</span>
+                    <span>$ XX.XXX.XXX</span>
+                </div>
+                <div class="total-item">
+                    <span>Imprevistos (%)</span>
+                    <span>$ XX.XXX.XXX</span>
+                </div>
+            </div>
+            <div class="gran-total">
+                <div class="gran-total-label">Total Estimado</div>
+                <div class="gran-total-valor">$ XX.XXX.XXX</div>
+            </div>
+        </div>
+
+        <div class="notas">
+            <div class="notas-titulo">Notas Técnicas</div>
+            <ul>
+                <li>• Nota 1 con detalles importantes.</li>
+                <li>• Nota 2 con fuente de precios.</li>
+                <li>• Nota 3 con advertencias.</li>
+                <li>• Nota 4 con contactoi.</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <strong>Arq. Leonardo Díaz</strong>
+            @soy.leo_ai · Presupuesto orientativo — No reemplaza cómputo detallado
+        </div>
+    </div>
+</body>
+</html>
